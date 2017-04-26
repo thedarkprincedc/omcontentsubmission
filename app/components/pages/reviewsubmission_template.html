@@ -1,0 +1,22 @@
+<div class="container" style="padding:35px;">
+     <div class="col-xs-12">
+          <h2>Review Submissions</h2>
+          <hr style="margin-top:5px; margin-bottom:5px;"/><br/>
+          <table class="table">
+               <thead>
+                    <tr>
+                         <th>Sub Num#</th>
+                         <th>Name</th>
+                         <th>Files</th>
+                    </tr>
+               </thead>
+               <tbody>
+                    <tr ng-repeat="story in stories">
+                         <td>{{story.id}}</td>
+                         <td>{{story.name}}</td>
+                         <td>{{story.files}}</td>
+                    </tr>
+               </tbody>
+          </table>
+     </div>
+</div>

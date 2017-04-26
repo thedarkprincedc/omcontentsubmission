@@ -1,0 +1,28 @@
+<div class="container" style="padding:35px;">
+     <div class="form col-xs-10 col-xs-offset-1">
+          <h2>OM Submission Form</h2>
+          <!--<ol class="breadcrumb" style="background: none;">
+               <li><a href="#" style="color:white;">Home</a></li>
+               <li class="active" style="color:white;">Document Upload</li>
+          </ol>-->
+          <hr style="margin-top:5px; margin-bottom:5px;"/>
+          <div class="form-group">
+               <label for="name">Name</label>
+               <input type="text" name="name" ng-model="submitform.name" class="form-control" placeholder="John Doe"/>
+          </div>
+          <div class="form-group">
+               <label for="email">Email</label>
+               <input type="text" name="email" ng-model="submitform.email" class="form-control" placeholder="john.doe@hotmail.com"/>
+          </div>
+          <div class="form-group">
+               <label for="desc">Description</label>
+               <textarea name="desc" ng-model="submitform.desc" class="form-control" rows="2" style="height: 325px;" placeholder="Write your story here"></textarea>
+          </div>
+          <div class="form-group">
+               <label for="upload">Upload File(s)</label><br/>
+               <button type="button" name="upload" class="btn btn-primary"><span class="glyphicon glyphicon-cloud-upload"></span> Upload</button>
+          </div>
+          <hr/>
+          <button type="button" class="btn btn-success" ng-click="onSubmitForm()" ng-disabled="submitted">Submit</button>
+     </div>
+</div>

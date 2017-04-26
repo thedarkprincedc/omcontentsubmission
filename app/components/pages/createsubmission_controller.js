@@ -1,5 +1,5 @@
 define(['app', 'angular'], function(app, angular){
-     app.controller("submission_controller", ['$scope', '$timeout','$location', function($scope, $timeout, $location){
+     app.controller("createsubmission_controller", ['$scope', '$timeout','$location', function($scope, $timeout, $location){
           $scope.screen = 0;
           $scope.submitform = {};
           $scope.alerts = [];

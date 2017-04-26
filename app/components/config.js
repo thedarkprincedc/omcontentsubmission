@@ -6,6 +6,8 @@ require.config({
           "angular-bootstrap-ui" : "../libs/angular-bootstrap/ui-bootstrap-tpls",
 
           "submission_controller" : "../components/pages/submission_controller",
+		"reviewsubmission_controller" : "../components/pages/reviewsubmission_controller",
+		"createsubmission_controller" : "../components/pages/createsubmission_controller",
 
           "router" : "router",
           "app" : "app"
@@ -32,6 +34,6 @@ require.config({
 		}
 	}
 });
-require(['jquery', 'angular', 'angular-route', 'submission_controller', 'router', 'app', 'angular-bootstrap-ui'], function(){
+require(['jquery', 'angular', 'angular-route', 'submission_controller', 'router', 'app', 'angular-bootstrap-ui','reviewsubmission_controller', 'createsubmission_controller'], function(){
 	angular.bootstrap(document, ['app']);
 });

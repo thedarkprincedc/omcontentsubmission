@@ -5,6 +5,9 @@ define(['jquery','angular', 'app'], function($, angular, app){
                templateUrl : 'components/pages/submission_template.html'
           }).when('/login', {
                templateUrl : 'components/pages/login_template.html'
+          }).when('/create', {
+               controller : "createsubmission_controller",
+               templateUrl : 'components/pages/createsubmission_template.html'
           }).when('/review', {
                controller : "reviewsubmission_controller",
                templateUrl : 'components/pages/reviewsubmission_template.html'
