@@ -1,0 +1,35 @@
+
+
+<div class="modal-body" id="modal-body">
+     <h2>{{currStoryItem.subject}}</h2>
+     <hr style="margin-top:5px; margin-bottom:5px;"/>
+     <br/>
+     <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" name="name" ng-model="currStoryItem.name" class="form-control" placeholder="John Doe"/>
+     </div>
+     <div class="form-group">
+          <label for="desc">Description</label>
+          <textarea name="desc" ng-model="currStoryItem.desc" class="form-control" rows="2" style="height: 325px;" placeholder="Write your story here"></textarea>
+     </div>
+     <div class="form-group" ng-show="currStoryItem.files">
+          <label for="attachments">Attachments</label>
+          <table class="table" name="attachments">
+               <thead>
+                    <tr>
+                         <td>filename</td>
+                         <td>size</td>
+                    </tr>
+               </thead>
+               <tbody>
+                    <tr ng-repeat="files in currStoryItem.files">
+                         <td>{{files.name}}</td>
+                         <td style="width:15%">{{files.size}}</td>
+                    </tr>
+               </tbody>
+          </table>
+     </div>
+     <hr/>
+     <button class="btn btn-success">Approve</button>
+     <button class="btn btn-danger">Decline</button>
+</div>

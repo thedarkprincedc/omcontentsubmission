@@ -1,21 +1,15 @@
 <div class="container" style="padding:35px;">
      <div class="col-xs-12">
-          <div class="alert-box col-xs-12">
-               <div uib-alert class="col-xs-2 col-xs-offset-10" ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
-          </div>
           <div ng-show="(screen == 0)?true:false">
                <div class="form col-xs-10 col-xs-offset-1">
                     <h2>What would you like to do today?</h2>
-
                     <hr style="margin-top:5px; margin-bottom:5px;"/>
-
                     <div style="padding-top:160px;">
                          <div class="col-xs-4 col-xs-offset-1 well" ng-click="screen=1">
                               <a href="#!/create">
                               <center><h3 class="success">Submit Story</h3></center><hr/>
                               <center><img src="assets/img/edit-pen-write-icon--2.png" alt="..." class="img-rounded" style="width:150px; filter: invert(100%);"></center>
                               </a>
-
                          </div>
                          <div class="col-xs-4 col-xs-offset-2 well">
                               <a href="#!/review">

@@ -1,11 +1,14 @@
 <div class="container" style="padding:35px;">
+     <div class="alert-box col-xs-12">
+          <div uib-alert class="col-xs-3 col-xs-offset-9" ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
+     </div>
      <div class="form col-xs-10 col-xs-offset-1">
           <h2>OM Submission Form</h2>
-          <!--<ol class="breadcrumb" style="background: none;">
-               <li><a href="#" style="color:white;">Home</a></li>
-               <li class="active" style="color:white;">Document Upload</li>
-          </ol>-->
           <hr style="margin-top:5px; margin-bottom:5px;"/>
+          <ol class="breadcrumb" style="background: none; padding: 0px; margin-left:0px;">
+               <li><a href="#" style="color:white;">Home</a></li>
+               <li class="active" style="color:white;">OM Submission Form</li>
+          </ol>
           <div class="form-group">
                <label for="name">Name</label>
                <input type="text" name="name" ng-model="submitform.name" class="form-control" placeholder="John Doe"/>

@@ -1,22 +1,40 @@
 <div class="container" style="padding:35px;">
-     <div class="col-xs-12">
+     <div class="col-xs-10 col-xs-offset-1">
           <h2>Review Submissions</h2>
-          <hr style="margin-top:5px; margin-bottom:5px;"/><br/>
-          <table class="table">
-               <thead>
+          <hr style="margin-top:5px; margin-bottom:5px;"/>
+          <ol class="breadcrumb" style="background: none; padding: 0px; margin-left:0px;">
+               <li><a href="#" style="color:white;">Home</a></li>
+               <li class="active" style="color:white;">Review Submissions</li>
+          </ol>
+          <div class="form-group">
+               <label for="name">Search</label>
+               <input type="text" name="search" ng-model="search" class="form-control" placeholder="What are we looking for today?"/>
+          </div>
+     
+
+          <table class="table hoverTable">
+               <!--<thead>
                     <tr>
-                         <th>Sub Num#</th>
-                         <th>Name</th>
-                         <th>Files</th>
+                         <th style="width:20%;">Subject</th>
+                         <th>Descriptions</th>
+                         <th style="width:10%;">Date</th>
                     </tr>
-               </thead>
+               </thead>-->
                <tbody>
-                    <tr ng-repeat="story in stories">
-                         <td>{{story.id}}</td>
-                         <td>{{story.name}}</td>
-                         <td>{{story.files}}</td>
+                    <tr ng-repeat="story in stories" ng-click="onClickStory()">
+                         <td style="width:23%;">fjwnjeonfw@jwdfsjo.com</td>
+                         <td>{{story.subject}} - {{story.shortdesc}}</td>
+                         <td style="width:10%;">{{story.subdate}}</td>
                     </tr>
                </tbody>
+               <!--<tfoot>
+                    <tr>
+                         <td></td>
+
+                              <td></td>
+                              <td>Total: {{stories.length}}</td>
+                    </tr>
+               </tfoot>-->
           </table>
      </div>
 </div>

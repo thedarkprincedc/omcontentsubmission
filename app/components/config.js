@@ -9,6 +9,9 @@ require.config({
 		"reviewsubmission_controller" : "../components/pages/reviewsubmission_controller",
 		"createsubmission_controller" : "../components/pages/createsubmission_controller",
 
+		"confirmation_modal" : "../components/modals/confirmation_modal",
+		"review_modal" : "../components/modals/review_modal",
+
           "router" : "router",
           "app" : "app"
 
@@ -26,7 +29,8 @@ require.config({
 		},
 		'angular-bootstrap-ui': {
 		    deps: ['angular']
-		}
+	    	}
+
 	},
 	map : {
 		'*' : {
@@ -34,6 +38,8 @@ require.config({
 		}
 	}
 });
-require(['jquery', 'angular', 'angular-route', 'submission_controller', 'router', 'app', 'angular-bootstrap-ui','reviewsubmission_controller', 'createsubmission_controller'], function(){
+require(['jquery', 'angular', 'angular-route',
+'submission_controller', 'router', 'app',
+'angular-bootstrap-ui','reviewsubmission_controller', 'createsubmission_controller', 'confirmation_modal', 'review_modal'], function(){
 	angular.bootstrap(document, ['app']);
 });
