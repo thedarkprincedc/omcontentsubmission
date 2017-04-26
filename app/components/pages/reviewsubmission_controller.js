@@ -7,7 +7,7 @@ define(['app', 'angular'], function(app, angular){
           }).then(function(msg){
                $scope.stories = msg.data.stories;
           });
-          
+
 
           $scope.onClickStory = function(){
                $scope.currStoryItem = this.story;
@@ -15,11 +15,37 @@ define(['app', 'angular'], function(app, angular){
                     templateUrl : "components/modals/review_modal_template.html",
                     controller: "review_modal",
                     resolve: {
-                          storyitem: function () {
-                            return $scope.currStoryItem;
-                          }
+                         storyitem: function () {
+                              return $scope.currStoryItem;
+                         }
                     }
                });
+               modalInstance.result.then(function (selectedItem) {
+                    var data = {
+                         id : $scope.currStoryItem.id,
+                         approved: false,
+                         declined: false
+                    };
+                    if(selectedItem == "approved"){
+                         $http({
+                              "url" : "./resources/submission/approve",
+                              "method" : "PUT",
+                              "data" : data
+                         }).then(function(){
+
+                         });
+                    }else if(selectedItem == "declined"){
+                         $http({
+                              "url" : "./resources/submission/declined",
+                              "method" : "PUT",
+                              "data" : data
+                         }).then(function(){
+
+                         });
+                    }
+               }, function () {
+                    //$log.info('modal-component dismissed at: ' + new Date());
+               })
           }
      }]);
 });

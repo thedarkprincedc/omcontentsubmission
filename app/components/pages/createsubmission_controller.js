@@ -1,5 +1,5 @@
 define(['app', 'angular'], function(app, angular){
-     app.controller("createsubmission_controller", ['$scope', '$timeout','$location', function($scope, $timeout, $location){
+     app.controller("createsubmission_controller", ['$scope', '$timeout','$location', '$uibModal', function($scope, $timeout, $location, $uibModal){
           $scope.screen = 0;
           $scope.submitform = {};
           $scope.alerts = [];
@@ -11,13 +11,29 @@ define(['app', 'angular'], function(app, angular){
                }
                $scope.submitted = true;
           },true);
+
+
           $scope.onSubmitForm = function(){
-               debugger;
+               var modalInstance = $uibModal.open({
+                    templateUrl : "components/modals/confirmation_modal_template.html",
+                    controller: "confirmation_modal",
+                    resolve: {
+                          storyitem: function () {
+                            return $scope.currStoryItem;
+                          }
+                    }
+               });
+               modalInstance.result.then(function (selectedItem) {
+                   $location.path("#/index");
+                 }, function () {
+                   //$log.info('modal-component dismissed at: ' + new Date());
+                 });
+               /*
                 $timeout(function(){
                      $scope.alerts.push({msg: 'Successfully uploaded form', type:'success'});
                 },3000).then(function(){
                       $scope.alerts.push({msg: 'Failed to upload form', type:'danger'});
-                });
+                });*/
           }
      }]);
 });
