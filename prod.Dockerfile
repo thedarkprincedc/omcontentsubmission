@@ -9,3 +9,5 @@ RUN apt-get update \
      && npm install mongoose \
      && cd /app \
      && npm install
+
+CMD ["/app/nodejs", "app.js"]

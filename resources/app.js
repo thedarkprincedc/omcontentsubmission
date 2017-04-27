@@ -7,7 +7,7 @@ var methodOverride = require('method-override');
 
 //app.use(express.static(__dirname + '/public'));
 var appPath = (process.env.production)?'./public':'../app';
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://127.0.0.1:27017/test');
 
 app.use(express.static(appPath));
 app.use(bodyParser.urlencoded({'extended':'true'}));            // parse application/x-www-form-urlencoded
