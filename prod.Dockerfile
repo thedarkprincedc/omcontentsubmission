@@ -9,5 +9,5 @@ RUN apt-get update \
      && npm install mongoose \
      && cd /app \
      && npm install
-
+EXPOSE 27017 28017 80 8080
 CMD ["nodejs", "/app/app.js"]
