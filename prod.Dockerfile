@@ -1,5 +1,6 @@
 FROM mongo
 ENV production true
+
 COPY /resources/* /app
 COPY /app/* /app/public
 
