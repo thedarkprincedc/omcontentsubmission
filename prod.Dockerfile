@@ -1,8 +1,8 @@
 FROM mongo
 ENV production true
 
-COPY /resources/* /app
-COPY /app/* /app/public
+COPY /resources/ /app
+COPY /app/ /app/public
 
 RUN apt-get update \
      && apt-get install -y nodejs npm \
