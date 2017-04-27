@@ -10,4 +10,4 @@ RUN apt-get update \
      && cd /app \
      && npm install
 
-CMD ["/app/nodejs", "app.js"]
+CMD ["nodejs", "/app/app.js"]
