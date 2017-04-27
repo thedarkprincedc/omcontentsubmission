@@ -1,13 +1,9 @@
 define(['app', 'angular'], function(app, angular){
      app.controller("reviewsubmission_controller", ['$scope', '$timeout', '$location', '$uibModal', '$http', function($scope, $timeout, $location,  $uibModal, $http){
           $scope.stories=[];
-          $http({
-               "method" : "GET",
-               "url" : "testdata.json"
-          }).then(function(msg){
-               $scope.stories = msg.data.stories;
+          $http.get("/api/stories").then(function(msg){
+               $scope.stories = msg.data;
           });
-
 
           $scope.onClickStory = function(){
                $scope.currStoryItem = this.story;
@@ -27,6 +23,7 @@ define(['app', 'angular'], function(app, angular){
                          declined: false
                     };
                     if(selectedItem == "approved"){
+
                          $http({
                               "url" : "./resources/submission/approve",
                               "method" : "PUT",
