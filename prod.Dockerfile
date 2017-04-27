@@ -6,5 +6,6 @@ COPY /app/* /app/public
 
 RUN apt-get update \
      && apt-get install -y nodejs npm \
-     && npm install mongoose
-     && cd /app && npm install
+     && npm install mongoose \
+     && cd /app \
+     && npm install
