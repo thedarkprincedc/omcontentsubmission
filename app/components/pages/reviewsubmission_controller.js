@@ -12,6 +12,8 @@ define(['app', 'angular'], function(app, angular){
                     controller: "review_modal",
                     resolve: {
                          storyitem: function () {
+                              $scope.currStoryItem.img = ($scope.currStoryItem._id)?
+                                   "http://localhost:9000/images/"+$scope.currStoryItem._id:null;
                               return $scope.currStoryItem;
                          }
                     }
@@ -23,9 +25,8 @@ define(['app', 'angular'], function(app, angular){
                          declined: false
                     };
                     if(selectedItem == "approved"){
-
                          $http({
-                              "url" : "./resources/submission/approve",
+                              "url" : "./api/stories/approve/"+$scope.currStoryItem._id,
                               "method" : "PUT",
                               "data" : data
                          }).then(function(){
@@ -33,7 +34,7 @@ define(['app', 'angular'], function(app, angular){
                          });
                     }else if(selectedItem == "declined"){
                          $http({
-                              "url" : "./resources/submission/declined",
+                              "url" : "./api/stories/declined/"+$scope.currStoryItem._id,
                               "method" : "PUT",
                               "data" : data
                          }).then(function(){

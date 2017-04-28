@@ -5,10 +5,19 @@ services:
                context: .
                dockerfile: dev.dockerfile
           container_name: omsubmission
+          environment:
+               - NODE_DEV=false
+               - MONGODB_ADDRESS=database
+               - MONGODB_PORT=27017
           volumes:
-                - "./app:/app"
+                - "./app:/app/public"
                 - "./_data/db:/data/db"
           ports:
-               - "9000:80"
+               - "9000:8080"
+          links:
+               - "database:db2"
+     database:
+          image: mongo
+          container_name: mongodb
+          ports:
                - "27017:27017"
-               - "28017:28017"

@@ -1,5 +1,5 @@
 define(['jquery','angular'], function($, angular){
-     var app = angular.module("app", ['ngRoute', 'ui.bootstrap']);
+     var app = angular.module("app", ['ngRoute', 'ui.bootstrap', 'ui.uploader']);
      app.config(function( ) {
           console.log("Romsync Configuring...");
 

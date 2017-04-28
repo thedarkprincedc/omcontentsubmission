@@ -28,8 +28,46 @@
           </div>
           <div class="form-group">
                <label for="upload">Upload File(s)</label><br/>
-               <button type="button" name="upload" class="btn btn-primary"><span class="glyphicon glyphicon-cloud-upload"></span> Upload</button>
+               <label class="btn btn-primary btn-file">
+                    <span class="glyphicon glyphicon-cloud-upload"></span>
+                    Upload<input type="file" id="fileinput" name="fileinput" data-file-upload-callback="uploadImage"/>
+               </label>
+               <!--<button type="button" name="upload" class="btn btn-primary"><span class="glyphicon glyphicon-cloud-upload"></span> Upload</button>-->
+
           </div>
+          <img data-http-src="{{avatarUrl}}" data-ng-if="hasimage" id="avatar" alt="Your Uploaded Picture"
+                          title="Your Uploaded Picture" height="80px" width="80px" aria-hidden="true"/>
+
+          <table id="uploadedImageTable" class="table" data-ng-show="uploadedImage" summary="Uploaded picture files" role="presentation">
+              <thead aria-hidden="true">
+                  <tr>
+                      <th>Image</th>
+                      <th scope="col">File Selected</th>
+                      <th scope="col">Size</th>
+                      <th scope="col">Actions</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td>
+                           <img class="imageArea img-thumbnail" ng-src="{{uploadedImage.imageSrc}}" title="Image to be uploaded" alt="Image to be uploaded" aria-hidden="true" width="200"/>
+                      </td>
+                      <td class="break-word">
+  					 <strong aria-hidden="true" id="uploadedImageName">{{ uploadedImage.name }}</strong>
+                          <div aria-hidden="true"><span id="imgPreviewLabel">Image to be uploaded:</span></div>
+                      </td>
+
+                      <td class="break-word" data-nowrap aria-hidden="true">{{ uploadedImage.size/1024/1024|number:2 }} MB</td>
+                      <td data-nowrap>
+                          <button id="removeUploadedImageButton" data-focus-me="true" type="button" class="btn btn-danger btn-xs"
+                                  data-ng-click="removeUploadedImage()" aria-labelledby="PNCSection imgPreviewLabel uploadedImageName removeUploadedImageButton">
+                              <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Remove
+                              <span class="sr-only">queued file</span>
+                          </button>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
           <hr/>
           <button type="button" class="btn btn-success" ng-click="onSubmitForm()" ng-disabled="submitted">Submit</button>
      </div>
