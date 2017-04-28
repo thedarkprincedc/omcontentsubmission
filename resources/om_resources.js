@@ -21,7 +21,12 @@ module.exports = function(app, mongoose, bodyParser){
      app.post('/api/stories', function(req, res) {
           if(req.body){
                //req.body.submission_date = new Date();
-               Story.create(req.body, function(err, stories){
+               Story.create({
+                    name : req.body.name,
+                    email : req.body.email,
+                    subject : req.body.subject,
+                    description : req.body.description
+               }, function(err, stories){
                     if (err){
                          res.send(err);
                     }
