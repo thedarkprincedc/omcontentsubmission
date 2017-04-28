@@ -5,8 +5,11 @@ module.exports = function(app, mongoose, bodyParser){
           subject : String,
           description : String,
           submission_date : { type: Date, default: Date.now },
-          img: { data: Buffer, contentType: String }
      });
+     var File = mongoose.model("Files", {
+          story_id : String,
+          img: { data: Buffer, contentType: String }
+     })
      app.get('/api/stories', function(req, res) {
           Story.find({}, null, {sort: {submission_date: -1}}, function(err, todos) {
                // if there is an error retrieving, send the error. nothing after res.send(err) will execute
@@ -49,10 +52,13 @@ module.exports = function(app, mongoose, bodyParser){
           });
      });
      app.post('/api/stories/image/:id',  bodyParser({limit: '5mb'}), function(req, res){
-          Story.findOneAndUpdate({"_id": req.params.id},{ "$set": { "img": {
-               data: req.files.file.data,
-               contentType: req.files.file.mimetype
-          } } }).exec(function (err, story){
+          File.create({
+               story_id: req.params.id,
+               img: {
+                    data: req.files.file.data,
+                    contentType: req.files.file.mimetype
+               }
+          }, function(err, files){
                if(err) {
                       console.log(err);
                       res.status(500).send(err);
@@ -60,10 +66,26 @@ module.exports = function(app, mongoose, bodyParser){
                     res.send({"state" : "success"});
                }
           });
+
+          /*Files.findOneAndUpdate({"_id": req.params.id},{ "$set": {
+               "img": {
+                    data: req.files.file.data,
+                    contentType: req.files.file.mimetype
+               }
+          } }).exec(function (err, story){
+               if(err) {
+                      console.log(err);
+                      res.status(500).send(err);
+               } else {
+                    res.send({"state" : "success"});
+               }
+          });*/
+
+
+
      });
      app.get('/images/:id', function(req, res){
-          Story.findOne({"_id" :req.params.id }, function(err, story){
-               console.log(story);
+          File.findOne({"story_id" :req.params.id }, function(err, story){
                res.set("Content-Type", story.img.contentType);
                res.send( story.img.data );
           });
