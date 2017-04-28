@@ -4,12 +4,20 @@ define(['app', 'angular'], function(app, angular){
           $scope.submitform = {};
           $scope.alerts = [];
           //$scope.submitted = true;
+          function validateForm(val){
+               return (val.name == '') ? false : true;
+          }
           $scope.$watch("submitform", function(val, oldVal){
-               /*if(val.name !== '' && /[A-Za-z0-9]+@[A-Za-z0-9]+\.[A-Za-z0-9]+/.test(val.email) && val.desc !== ''){
-               $scope.submitted = false;
+               /*if(val.name !== ''
+                    && /[A-Za-z0-9]+@[A-Za-z0-9]+\.[A-Za-z0-9]+/.test(val.email)
+                    && val.description !== ''){
+                    $scope.submitted = false;
+               return;*/
+          //}
+          if(validateForm(val)){
                return;
           }
-          $scope.submitted = true;*/
+          $scope.submitted = true;
      },true);
 
      $scope.uploadImage = function (uploadEvent) {

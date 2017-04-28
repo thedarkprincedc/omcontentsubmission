@@ -1,10 +1,16 @@
-define(['app', 'angular'], function(app, angular){
+define(['app', 'angular', 'moment'], function(app, angular, moment){
      app.controller("reviewsubmission_controller", ['$scope', '$timeout', '$location', '$uibModal', '$http', function($scope, $timeout, $location,  $uibModal, $http){
           $scope.stories=[];
           $http.get("/api/stories").then(function(msg){
+               msg.data.map(function(value){
+                    value.submission_date_d = moment(value.submission_date).format("MMM DD");
+                    return value;
+               });
                $scope.stories = msg.data;
           });
-
+            //alert(moment().format('dddd, MMMM Do YYYY, h:mm:ss a'));
+//console.log(moment("1995-12-25"));
+//debugger;
           $scope.onClickStory = function(){
                $scope.currStoryItem = this.story;
                var modalInstance = $uibModal.open({
@@ -13,7 +19,7 @@ define(['app', 'angular'], function(app, angular){
                     resolve: {
                          storyitem: function () {
                               $scope.currStoryItem.img = ($scope.currStoryItem._id)?
-                                   "http://localhost:9000/images/"+$scope.currStoryItem._id:null;
+                                   "/images/"+$scope.currStoryItem._id:null;
                               return $scope.currStoryItem;
                          }
                     }

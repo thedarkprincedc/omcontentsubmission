@@ -4,11 +4,11 @@ module.exports = function(app, mongoose, bodyParser){
           email : String,
           subject : String,
           description : String,
-          submission_date : String,
+          submission_date : { type: Date, default: Date.now },
           img: { data: Buffer, contentType: String }
      });
      app.get('/api/stories', function(req, res) {
-          Story.find(function(err, todos) {
+          Story.find({}, null, {sort: {submission_date: -1}}, function(err, todos) {
                // if there is an error retrieving, send the error. nothing after res.send(err) will execute
                if (err)
                     res.send(err)
@@ -17,7 +17,7 @@ module.exports = function(app, mongoose, bodyParser){
      });
      app.post('/api/stories', function(req, res) {
           if(req.body){
-               req.body.submission_date = new Date();
+               //req.body.submission_date = new Date();
                Story.create(req.body, function(err, stories){
                     if (err){
                          res.send(err);

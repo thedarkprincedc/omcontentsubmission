@@ -4,14 +4,27 @@
           <hr style="margin-top:5px; margin-bottom:5px;"/>
           <ol class="breadcrumb" style="background: none; padding: 0px; margin-left:0px;">
                <li><a href="#" style="color:white;">Home</a></li>
-               <li class="active" style="color:white;">Review Submissions</li>
+               <li class="active" style="color:white;"><b>Review Submissions</b></li>
           </ol>
           <div class="form-group">
                <label for="name">Search</label>
                <input type="text" name="search" ng-model="search" class="form-control" placeholder="What are we looking for today?"/>
           </div>
+     <div class="form-group">
+<div class="row">
+               <div class="col-xs-3">
+               <button class="btn btn-danger btn-sm" ng-click="onClickTrash()" disabled="selection"><span class="glyphicon glyphicon-trash"></span></button>
+               &nbsp;&nbsp;&nbsp;
+               <button class="btn btn-success btn-sm" ng-click="onClickTrash()" disabled="selection"><span class="glyphicon glyphicon-ok" ng-click="onClickApprove()"></span></button>
+               <button class="btn btn-danger btn-sm" ng-click="onClickTrash()" disabled="selection"><span class="glyphicon glyphicon-remove" ng-click="onClickDecline()"></span></button>
+               </div>
 
+               <div class="col-xs-2 col-xs-offset-6">
 
+               </div>
+     </div>
+</div>
+<div style="overflow-y:auto; height:700px; width:100%;">
           <table class="table hoverTable table-condensed">
                <!--<thead>
                     <tr>
@@ -21,10 +34,11 @@
                     </tr>
                </thead>-->
                <tbody>
-                    <tr ng-repeat="story in stories" ng-click="onClickStory()">
-                         <td style="width:23%;">{{story.name}}</td>
-                         <td>{{story.subject}} - {{story.description}}</td>
-                         <td style="width:10%;">{{story.submission_date}}</td>
+                    <tr ng-repeat="story in stories">
+                         <td style="width:4%;"><input type="checkbox" ng-model="d_checkout" ng-click="selection='true'" /></td>
+                         <td style="width:15%;"ng-click="onClickStory()">{{story.name}}</td>
+                         <td ng-click="onClickStory()">{{story.subject}} <span style="color:#ababab;"> - {{story.description}}</span></td>
+                         <td style="width:5%;">{{story.submission_date_d}}</td>
                     </tr>
                </tbody>
                <!--<tfoot>
@@ -36,5 +50,7 @@
                     </tr>
                </tfoot>-->
           </table>
+
+</div>
      </div>
 </div>

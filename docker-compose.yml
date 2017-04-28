@@ -1,5 +1,12 @@
 version: "2.1"
 services:
+     database:
+          image: mongo
+          container_name: mongodb
+          volumes:
+               - "./_data/db:/data/db"
+          ports:
+               - "27017:27017"
      webfrontend:
           build:
                context: .
@@ -10,14 +17,9 @@ services:
                - MONGODB_ADDRESS=database
                - MONGODB_PORT=27017
           volumes:
-                - "./app:/app/public"
+                #- "./app:/app/public"
                 - "./_data/db:/data/db"
           ports:
                - "9000:8080"
           links:
                - "database:db2"
-     database:
-          image: mongo
-          container_name: mongodb
-          ports:
-               - "27017:27017"

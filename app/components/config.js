@@ -5,7 +5,9 @@ require.config({
 		"angular-route" : "../libs/angular-route/angular-route",
           "angular-bootstrap-ui" : "../libs/angular-bootstrap/ui-bootstrap-tpls",
 		"angular-uploader-ui" : "../libs/angular-ui-uploader/dist/uploader",
-          "submission_controller" : "../components/pages/submission_controller",
+		"moment" : "../libs/moment/moment",
+
+		"submission_controller" : "../components/pages/submission_controller",
 		"reviewsubmission_controller" : "../components/pages/reviewsubmission_controller",
 		"createsubmission_controller" : "../components/pages/createsubmission_controller",
 
