@@ -4,7 +4,7 @@ var app      = express();
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
-
+var timeout = require("connect-timeout");
 
 //app.use(express.static(__dirname + 'public'));
 var appPath = (process.env.production)?'./public':'../app';
@@ -22,6 +22,7 @@ app.use(bodyParser.urlencoded({'extended':'true'}));            // parse applica
 app.use(bodyParser.json());                                     // parse application/json
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 app.use(methodOverride());
+app.use(timeout('100s'));
 var pp = process.argv.slice(2);
 var om_resources = require('./om_resources.js')(app, mongoose, bodyParser);
 
