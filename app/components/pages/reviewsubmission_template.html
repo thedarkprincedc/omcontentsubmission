@@ -1,4 +1,4 @@
-<div class="container" style="padding:35px;">
+<div class="container-fluid" style="padding:35px;">
      <div class="col-xs-12">
           <h2>Review Submissions</h2>
           <hr style="margin-top:5px; margin-bottom:5px;"/>
@@ -12,23 +12,24 @@
           </div>
           <div class="form-group">
                <div class="row">
-                    <div class="col-xs-3">
-                         <button class="btn btn-danger btn-sm" ng-click="onClickTrash()" disabled="selection"><span class="glyphicon glyphicon-trash"></span></button>
+                    <div class="col-xs-6">
+                         <button class="btn btn-danger btn-sm" ng-click="onClickTrash()" ng-disabled="selection"><span class="glyphicon glyphicon-trash"></span></button>
                          &nbsp;&nbsp;&nbsp;
-                         <button class="btn btn-success btn-sm" ng-click="onClickTrash()" disabled="selection"><span class="glyphicon glyphicon-ok" ng-click="onClickApprove()"></span></button>
-                         <button class="btn btn-danger btn-sm" ng-click="onClickTrash()" disabled="selection"><span class="glyphicon glyphicon-remove" ng-click="onClickDecline()"></span></button>
-                    </div>
-
-                    <div class="col-xs-2 col-xs-offset-6">
+                         <button class="btn btn-success btn-sm" ng-click="onClickApprove()" ng-disabled="selection"><span class="glyphicon glyphicon-ok"></span></button>
+                         <button class="btn btn-danger btn-sm" ng-click="onClickDecline()" ng-disabled="selection"><span class="glyphicon glyphicon-remove"></span></button>
 
                     </div>
+                    <div class="col-xs-6">
+                    <p class="text-right"><b>{{(stories.length > 0)? stories.length + " Submissions Found":"No Submissions Found" }}</b></p>
+                    </div<
                </div>
           </div>
+
           <div style="overflow-y:auto; height:700px; width:100%;">
                <table class="table hoverTable table-condensed">
                     <tbody>
                          <tr ng-repeat="story in stories">
-                              <td style="width:4%;"><input type="checkbox" ng-model="d_checkout" ng-click="selection='true'" /></td>
+                              <td style="width:4%;"><input type="checkbox" ng-model="checkboxModel[$index]" ng-true-value="'{{story._id}}'"  /></td>
                               <td style="width:15%;"ng-click="onClickStory()">{{story.name}}</td>
                               <td ng-click="onClickStory()">{{story.subject}} <span style="color:#ababab;"> - {{story.description}}</span></td>
                               <td style="width:5%;">{{story.submission_date_d}}</td>
@@ -36,5 +37,6 @@
                     </tbody>
                </table>
           </div>
+          
      </div>
 </div>

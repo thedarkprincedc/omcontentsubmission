@@ -16,11 +16,17 @@
                </div>
           </div>
      </div>
-     <div class="form-group" style="padding-bottom:45px;">
+     <div class="form-group">
           <label for="desc">Description</label>
-          <p>{{currStoryItem.description}}</p>
+          <pre style="background-color:#5c5c5c; color:white;padding-bottom:50px;padding-top:20px;"><b>Story #1</b><br/><br/>{{currStoryItem.description}}</pre>
+
      </div>
-     <img src="{{currStoryItem.img}}" width="150" class="img-thumbnail"/>
+     <div class="form-group">
+          <label for="images">Images</label><br/>
+          <img name="images" ng-src="{{currStoryItem.img}}" width="150" class="img-thumbnail"/>
+     </div>
+
+<!--
      <div class="form-group" ng-show="currStoryItem.files">
           <label for="attachments">Attachments</label>
           <table class="table" name="attachments">
@@ -38,6 +44,7 @@
                </tbody>
           </table>
      </div>
+-->
      <hr/>
      <button class="btn btn-success" ng-click="onApproveClicked()">Approve</button>
      <button class="btn btn-danger" ng-click="onDeleteClicked()">Decline</button>

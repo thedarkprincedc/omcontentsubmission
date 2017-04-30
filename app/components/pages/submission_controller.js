@@ -11,6 +11,7 @@ define(['app', 'angular'], function(app, angular){
                }
                $scope.submitted = true;
           },true);
+          
           $scope.onSubmitForm = function(){
                 $timeout(function(){
                      $scope.alerts.push({msg: 'Successfully uploaded form', type:'success'});

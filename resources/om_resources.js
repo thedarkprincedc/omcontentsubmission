@@ -5,6 +5,7 @@ module.exports = function(app, mongoose, bodyParser){
           subject : String,
           description : String,
           submission_date : { type: Date, default: Date.now },
+          approved: { type: Boolean, default: false }
      });
      var File = mongoose.model("Files", {
           story_id : String,
@@ -56,6 +57,23 @@ module.exports = function(app, mongoose, bodyParser){
                });
           });
      });
+     app.delete('/api/stories', function(req, res) {
+          console.log(req.body.idlist);
+          Story.remove({
+               _id : { $in: req.body.idlist}
+          }, function(err, story) {
+               if (err){
+                    res.send(err);
+               }
+               Story.find(function(err, stories) {
+                    if (err){
+                         res.send(err)
+                    }
+                    res.json(stories);
+               });
+          });
+     });
+
      app.post('/api/stories/image/:id',  bodyParser({limit: '5mb'}), function(req, res){
           File.create({
                story_id: req.params.id,
@@ -71,12 +89,32 @@ module.exports = function(app, mongoose, bodyParser){
                     res.send({"state" : "success"});
                }
           });
+     });
+     app.get('/images/:id', function(req, res){
+          File.findOne({"story_id" :req.params.id }, function(err, story){
+               if(err) {
+                      console.log(err);
+                      res.status(500).send(err);
+               } else {
+                    try{
+                         res.set("Content-Type", story.img.contentType);
+                         res.send( story.img.data );
+                    }
+                    catch(e){
+                          res.status(404).send(e);
+                    }
 
-          /*Files.findOneAndUpdate({"_id": req.params.id},{ "$set": {
-               "img": {
-                    data: req.files.file.data,
-                    contentType: req.files.file.mimetype
+
                }
+          });
+     });
+
+     app.patch('/api/stories/approve/:id', function(req, res){
+          console.log(req.params.id);
+          console.log(req.body);
+
+          Story.findOneAndUpdate({"_id": req.params.id},{ "$set": {
+               "approved": true
           } }).exec(function (err, story){
                if(err) {
                       console.log(err);
@@ -84,22 +122,20 @@ module.exports = function(app, mongoose, bodyParser){
                } else {
                     res.send({"state" : "success"});
                }
-          });*/
-
-
-
-     });
-     app.get('/images/:id', function(req, res){
-          File.findOne({"story_id" :req.params.id }, function(err, story){
-               res.set("Content-Type", story.img.contentType);
-               res.send( story.img.data );
           });
      });
-
-     app.put('/app/stories/approve/:id', function(req, res){
-
-     });
-     app.put('/app/stories/decline/:id', function(req, res){
-
+     app.patch('/api/stories/decline/:id', function(req, res){
+               console.log(req.params.id);
+          console.log(req.body);
+          Story.findOneAndUpdate({"_id": req.params.id},{ "$set": {
+               "approved": false
+          } }).exec(function (err, story){
+               if(err) {
+                      console.log(err);
+                      res.status(500).send(err);
+               } else {
+                    res.send({"state" : "success"});
+               }
+          });
      });
 }

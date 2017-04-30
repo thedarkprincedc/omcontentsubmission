@@ -17,7 +17,7 @@ services:
                - MONGODB_ADDRESS=database
                - MONGODB_PORT=27017
           volumes:
-                #- "./app:/app/public"
+                - "./app:/app/public"
                 - "./_data/db:/data/db"
           ports:
                - "9000:8080"

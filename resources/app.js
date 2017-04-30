@@ -1,10 +1,10 @@
-var express  = require('express');
-var fileUpload = require('express-fileupload');
-var app      = express();
-var mongoose = require('mongoose');
-var bodyParser = require('body-parser');
+var express        = require('express');
+var fileUpload     = require('express-fileupload');
+var app            = express();
+var mongoose       = require('mongoose');
+var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
-var timeout = require("connect-timeout");
+var timeout        = require("connect-timeout");
 
 //app.use(express.static(__dirname + 'public'));
 var appPath = (process.env.production)?'./public':'../app';

@@ -3,9 +3,9 @@ module.exports = function(grunt) {
      grunt.initConfig({
           pkg: grunt.file.readJSON('package.json'),
           yeoman: {
-                // configurable paths
-                app: require('./bower.json').appPath || 'app',
-                dist: 'dist'
+               // configurable paths
+               app: require('./bower.json').appPath || 'app',
+               dist: 'dist'
           },
           clean: {
                build: ['build/', 'dist/'],
@@ -19,8 +19,27 @@ module.exports = function(grunt) {
                               src: ['bootstrap-sass'],
                               dest: 'css/'
                          }
-                    ],
+                    ]
                },
+               dist : {
+                    files: [{
+                         expand: true,
+                         dot: true,
+                         cwd: '<%= yeoman.app %>',
+                         dest: '<%= yeoman.dist %>',
+                         src: [
+                              //'**/*',
+                              '**/main.css',
+                              'assets/img/**',
+                              'assets/fonts/**',
+                              '**/templates.js',
+                              '**/require.js',
+                              '!_assets/css/sass',
+                              '!_assets/css/less',
+                              '!_assets/images'
+                         ]
+                    }]
+               }
           },
           bowercopy :{
                options: {
@@ -43,7 +62,7 @@ module.exports = function(grunt) {
                app:        {
                     cwd:      './app',
                     src:      ['**/*_template.html'],
-                    dest:     './app/templates.js',
+                    dest:     './app/components/templates.js',
                     options: {
                          htmlmin: {
                               collapseWhitespace: true,
@@ -73,6 +92,36 @@ module.exports = function(grunt) {
                          debugInfo: true
                     }
                }
+          },
+          replace : {
+               dist: {
+                    options: {
+                         patterns: [
+                              {
+                                   match: 'components/config.js',
+                                   replacement: 'components/config-built-min.js'
+                              }
+                         ],
+                         usePrefix: false
+                    },
+                    files: [
+
+                         {expand: true, flatten: true, src: ['app/index.html'], dest: 'dist/'}
+                    ]
+               }
+          },
+          requirejs : {
+               compile: {
+                    options: {
+                         baseUrl: '<%= yeoman.app %>/components',
+                         //optimize: 'uglify2',
+                         optimize: 'none',
+                         name: 'config',
+                         mainConfigFile: '<%= yeoman.app %>/components/config.js',
+                         out: '<%= yeoman.dist %>/components/config-built-min.js',
+                         preserveLicenseComments: false
+                    }
+               }
           }
      });
      grunt.loadNpmTasks('grunt-contrib-clean');
@@ -81,9 +130,12 @@ module.exports = function(grunt) {
      grunt.loadNpmTasks('grunt-bower');
      grunt.loadNpmTasks('grunt-angular-templates');
      grunt.loadNpmTasks('grunt-contrib-compass');
+     grunt.loadNpmTasks('grunt-replace');
+     grunt.loadNpmTasks('grunt-contrib-requirejs');
      // Default task.
      grunt.registerTask('default', ['build']);
      grunt.registerTask('build', ['clean', 'bowercopy', 'ngtemplates']);
+     grunt.registerTask('prod', ['build', 'requirejs', 'replace', 'copy:dist']);
      //grunt.registerTask('default', ['jshint', 'qunit', 'concat', 'uglify']);
      //grunt.registerTask('build', ['clean', 'copy', 'compress']);
 };

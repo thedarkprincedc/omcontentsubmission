@@ -1,0 +1,13 @@
+<div class="modal-body" id="modal-body">
+     <h3>New Submission</h3>
+     <hr/>
+     <div class="form-group">
+          <label for="name">Title</label>
+          <input type="text" name="name" ng-model="_submission.subject" class="form-control" placeholder="Name of Story or Poem"/>
+     </div>
+     <div class="form-group">
+          <textarea name="desc" ng-model="_submission.description" class="form-control" rows="2" style="height: 325px;" placeholder="Write your story here"></textarea>
+     </div>
+     <button class="btn btn-primary" ng-click="onClickAddSubmission()" ng-disabled="(_submission.subject == '' || _submission.description == '')">Submit</button>
+     <button class="btn btn-primary" ng-click="onClickClose()">Close</button>
+</div>
