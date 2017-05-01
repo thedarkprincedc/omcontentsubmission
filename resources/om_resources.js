@@ -1,16 +1,22 @@
 module.exports = function(app, mongoose, bodyParser){
+     var SubmissionSchema = mongoose.model("SubmissionSchema", {
+          subject : String,
+          description : String
+     });
      var Story = mongoose.model('Story', {
           name : String,
           email : String,
           subject : String,
           description : String,
           submission_date : { type: Date, default: Date.now },
-          approved: { type: Boolean, default: false }
+          approved: { type: Boolean, default: false },
+          list:[SubmissionSchema.schema]
      });
      var File = mongoose.model("Files", {
           story_id : String,
           img: { data: Buffer, contentType: String }
      })
+
      app.get('/api/stories', function(req, res) {
           Story.find({}, null, {sort: {submission_date: -1}}, function(err, todos) {
                // if there is an error retrieving, send the error. nothing after res.send(err) will execute
@@ -26,7 +32,8 @@ module.exports = function(app, mongoose, bodyParser){
                     name : req.body.name,
                     email : req.body.email,
                     subject : req.body.subject,
-                    description : req.body.description
+                    description : req.body.description,
+                    list : req.body.list
                }, function(err, stories){
                     if (err){
                          res.send(err);

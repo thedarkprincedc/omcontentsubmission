@@ -15,8 +15,33 @@ define(['app', 'angular'], function(app, angular){
                list: []
           };
           $scope.onClickModify = function(){
+               var index = this.$index;
                $scope._submission.subject = $scope._submission.list[this.$index].subject;
                $scope._submission.description = $scope._submission.list[this.$index].description;
+               var modalInstance = $uibModal.open({
+                    templateUrl : "components/modals/submission_modal_template.html",
+                    controller: "submission_modal",
+                    resolve: {
+                         submissionData : function(){
+                              return $scope._submission;
+                         }
+                    }
+               });
+               modalInstance.result.then(function (result) {
+                    if(result === 'addSubmission'){
+                         if($scope._submission.subject.length > 0 && $scope._submission.description.length > 0){
+                              $scope._submission.list[index].subject = $scope._submission.subject;
+                              $scope._submission.list[index].description = $scope._submission.description;
+
+                         }
+                    }
+                    $scope._submission.subject = "";
+                    $scope._submission.description = "";
+               }, function () {
+
+                    //$log.info('modal-component dismissed at: ' + new Date());
+               });
+
           };
           $scope.onClickRemove = function(){
                $scope._submission.list = $scope._submission.list.slice(this.$index+1);
@@ -33,7 +58,6 @@ define(['app', 'angular'], function(app, angular){
 
                $scope.bSubmitDisabled = (
                     (val.name == '' || val.name == null)
-                    || (val.subject == '' || val.subject == null)
                     || (val.email == '' || val.email == null || !/[A-Za-z0-9]+@[A-Za-z0-9]+\.[A-Za-z0-9]+/.test(val.email) )
 
 
@@ -110,7 +134,7 @@ define(['app', 'angular'], function(app, angular){
                     if(result === 'addSubmission'){
                          if($scope._submission.subject.length > 0 && $scope._submission.description.length > 0){
                               $scope._submission.list.push({ subject : $scope._submission.subject, description : $scope._submission.description});
-                         }     
+                         }
                     }
                     $scope._submission.subject = "";
                     $scope._submission.description = "";

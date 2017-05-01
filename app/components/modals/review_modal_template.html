@@ -1,7 +1,4 @@
 <div class="modal-body" id="modal-body">
-
-     <h2>{{currStoryItem.subject}}</h2>
-     <hr style="margin-top:5px; margin-bottom:5px;"/><br/>
      <div class="row">
           <div class="col-xs-7">
                <div class="form-group">
@@ -16,11 +13,16 @@
                </div>
           </div>
      </div>
+
      <div class="form-group">
           <label for="desc">Description</label>
-          <pre style="background-color:#5c5c5c; color:white;padding-bottom:50px;padding-top:20px;"><b>Story #1</b><br/><br/>{{currStoryItem.description}}</pre>
+          <div ng-repeat="item in currStoryItem.list">
+               <pre style="background-color:#5c5c5c; color:white;padding-bottom:50px;padding-top:20px;"><b>Story #{{$index+1}} - {{item.subject}}</b><br/><br/>{{item.description}}</pre>
+          </div>
+
 
      </div>
+
      <div class="form-group">
           <label for="images">Images</label><br/>
           <img name="images" ng-src="{{currStoryItem.img}}" width="150" class="img-thumbnail"/>
